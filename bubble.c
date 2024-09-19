@@ -6,9 +6,9 @@ int main() {
     srand(time(NULL));
     int rand_max, length;
 
-    printf("Введите максимальное рандомное число которое может выпасть: ");
+    printf("Enter max random integer: ");
     scanf("%d", &rand_max);
-    printf("Введите размер массива: ");
+    printf("Enter array length: ");
     scanf("%d", &length);
 
     int* numbers = calloc(length, sizeof(int));
@@ -17,11 +17,19 @@ int main() {
         numbers[i] = rand() % rand_max + 1;
     }
 
-    printf("Массив - ");
+    printf("Initial array: ");
     print_array(numbers, length);
+
+    clock_t start_time = clock();
     sort(numbers, length);
-    printf("Отсортированный массив - ");
+    clock_t end_time = clock();
+
+    double result_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+
+    printf("Sorted array: ");
     print_array(numbers, length);
+
+    printf("The array was sorted in %f ms", result_time);
 
     free(numbers);
 
